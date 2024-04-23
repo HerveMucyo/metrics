@@ -3,7 +3,6 @@ import platform
 import time
 from ping3 import ping
 
-
 def packet_loss_rate(destination, count=10):
     loss_count = 0
     for _ in range(count):
