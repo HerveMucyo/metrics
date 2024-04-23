@@ -1,0 +1,25 @@
+Here's a high-level algorithm for the packet loss rate tracking project:
+
+1. Start: Begin the program execution.
+
+2. Display Instructions: Print instructions to the user, explaining the purpose of the application and how to use it.
+
+3. Prompt for Destination: Display a prompt asking the user to enter the destination (IP address or hostname) they want to ping.
+
+4. Get User Input: Read the user input for the destination.
+
+5. Prompt for Packet Count: Display a prompt asking the user to enter the number of packets to send (default is 10).
+
+6. Get Packet Count Input: Read the user input for the number of packets to send. If no input is provided, set the count to the default value (10).
+
+7. Ping Destination: Use the ping utility to send ICMP echo requests to the specified destination for the specified number of packets.
+                     Measure the number of packets lost during the ping process.
+
+8.Calculate Packet Loss Rate: Calculate the packet loss rate as a percentage based on the number of lost packets and the total number of packets sent.
+
+9.Display Results: Print the packet loss rate to the user.
+
+10. End: End the program execution.
+
+This algorithm outlines the steps needed to implement the packet loss rate tracking functionality in your Python terminal application. You can translate 
+these steps into code, as demonstrated earlier, to create the complete application.
