@@ -1,7 +1,8 @@
 import subprocess
 import platform
 import time
- 
+import socket
+
 from ping3 import ping
 
 def packet_loss_rate(destination, count=10):
@@ -20,19 +21,21 @@ def packet_loss_rate(destination, count=10):
 
     return (loss_count / count) * 100
 
-
-
 def main():
     print("Packet Loss Rate Tracker")
     destination = input("Enter the destination to ping: ")
     count = int(input("Enter the number of packets to send (default is 10): ") or 10)
     print("Pinging {}...".format(destination))
     time.sleep(1)  # Wait for 1 second before starting ping
-    loss_rate = packet_loss_rate(destination, count)
-    if loss_rate is not None:
-        print("Packet loss rate to {} is {:.4f}%".format(destination, loss_rate))
-    else:
-        print("Failed to determine packet loss rate.")
+    
+    try:
+        loss_rate = packet_loss_rate(destination, count)
+        if loss_rate is not None:
+            print("Packet loss rate to {} is {:.4f}%".format(destination, loss_rate))
+        else:
+            print("Failed to determine packet loss rate.")
+    except socket.gaierror as e:
+        print("Failed to resolve the hostname:", e)
 
 if __name__ == "__main__":
     main()
