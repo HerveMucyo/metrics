@@ -11,10 +11,9 @@ class TestPacketLossRate(unittest.TestCase):
 
     @patch('tracker.ping', side_effect=[None, None, 0.0])
     def test_packet_loss_rate_some_loss(self, mock_ping):
-    # Test case when some packet loss occurs
+        # Test case when some packet loss occurs
         loss_rate = packet_loss_rate("www.igihe.com", count=3)
-        self.assertEqual(loss_rate, 66.67)  # Expected packet loss rate should be 66.67, not 33.33
-
+        self.assertAlmostEqual(loss_rate, 66.66666666666667, places=4)  # Increased precision to 4 decimal places
 
     @patch('tracker.ping', side_effect=[None, None, None])
     def test_packet_loss_rate_all_loss(self, mock_ping):
