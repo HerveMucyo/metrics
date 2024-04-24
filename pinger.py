@@ -1,5 +1,6 @@
 import ping3 as ping
 
+
 def calculate_packet_loss(ping_results, threshold=1000):
     successful_pings = sum(1 for result in ping_results if result is not None and result <= threshold)
     packet_loss_rate = 100.0 - (successful_pings / len(ping_results) * 100.0)

@@ -1,25 +1,117 @@
-Here's a high-level algorithm for the packet loss rate tracking project:
+Algorithm Design:
+-------------------
 
-1. Start: Begin the program execution.
+1. Sending Ping Requests:
+    
+    Input: Hostname or IP address, number of ping requests, and timeout duration.
+   
+    Algorithm:
 
-2. Display Instructions: Print instructions to the user, explaining the purpose of the application and how to use it.
+  -> Accept user input for the target host, number of ping requests, and timeout duration.
+  -> Use a loop to send the specified number of ICMP echo requests to the target host using the ping3.ping() function.
+  -> Store the response times in a list.
+  -> If a response is received within the timeout period, record the response time. Otherwise, mark the request as timed out.
+  -> Repeat steps 2-4 for the specified number of ping requests.
+    
+    Output: List of response times or "Request timed out" messages.
 
-3. Prompt for Destination: Display a prompt asking the user to enter the destination (IP address or hostname) they want to ping.
+2. Calculating Packet Loss Rate:
 
-4. Get User Input: Read the user input for the destination.
+    Input: List of response times.
+    
+    Algorithm:
+  
+  -> Count the number of successful pings (response received within the timeout).
+  -> Calculate the packet loss rate as the percentage of unsuccessful pings.
 
-5. Prompt for Packet Count: Display a prompt asking the user to enter the number of packets to send (default is 10).
+   Output: Packet loss rate.
 
-6. Get Packet Count Input: Read the user input for the number of packets to send. If no input is provided, set the count to the default value (10).
 
-7. Ping Destination: Use the ping utility to send ICMP echo requests to the specified destination for the specified number of packets.
-                     Measure the number of packets lost during the ping process.
+    Pseudo Code:
+    -----------
+1 .Sending Ping Requests:
 
-8.Calculate Packet Loss Rate: Calculate the packet loss rate as a percentage based on the number of lost packets and the total number of packets sent.
+Procedure SendPingRequests(host, num_requests, timeout):
+    ping_results = []
+    For i = 1 to num_requests:
+        response_time = ping(host, timeout)
+        ping_results.append(response_time)
+    Return ping_results
 
-9.Display Results: Print the packet loss rate to the user.
+2.Calculating Packet Loss Rate:
 
-10. End: End the program execution.
+Procedure CalculatePacketLoss(ping_results):
+    successful_pings = CountSuccessfulPings(ping_results)
+    packet_loss_rate = (1 - (successful_pings / num_requests)) * 100
+    Return packet_loss_rate
 
-This algorithm outlines the steps needed to implement the packet loss rate tracking functionality in your Python terminal application. You can translate 
-these steps into code, as demonstrated earlier, to create the complete application.
+
+Flowcharts:
+----------
+
+1.Sending Ping Requests:
+
+
+  Start
+    |
+    V
+[Accept user input]
+    |
+    V
+[Initialize ping_results list]
+    |
+    V
+[Loop for num_requests times]
+    |
+    V
+[Send ping request]
+    |
+    V
+[Record response time]
+    |
+    V
+[Add response time to ping_results]
+    |
+    V
+[End of loop]
+    |
+    V
+[Return ping_results]
+    |
+    V
+   End
+
+
+2.Calculating Packet Loss Rate:
+
+   Start
+    |
+    V
+[Accept ping_results list]
+    |
+    V
+[Count successful pings]
+    |
+    V
+[Calculate packet loss rate]
+    |
+    V
+[Return packet loss rate]
+    |
+    V
+   End
+
+
+Data Structures and Models:
+ping_results: List to store the response times of ping requests.
+timeout: Integer or float to specify the timeout duration for each ping request.
+PacketLossRate: Float value representing the percentage of packet loss.
+
+
+
+
+//for installing 
+pip install pyinstaller
+
+//for compiling
+pyinstaller --onefile pinger.py
